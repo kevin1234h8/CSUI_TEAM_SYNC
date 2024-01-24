@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\CSUI_Teams_Sync.props" />
+</Project>
