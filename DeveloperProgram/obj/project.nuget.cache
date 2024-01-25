@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LDLxt9b3hlW2Hx6rDL+rVR+JiNMul55ueQy+f4JNcFdZYAuXkL0iqBPWXAN1f5Ai7n0MeicmpW7EnD8FbHWIyQ==",
+  "dgSpecHash": "P4IwvYoyuDLrqxuY3OlcijR5TCdJC0GCqK9AVX0rqU4mvWWwjiNfX9udu80YEGnms2fIHEzBm51ze6GAdeVX1w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\user\\source\\repos\\DeveloperProgram\\DeveloperProgram\\CSUI_Teams_Sync.csproj",
+  "projectFilePath": "C:\\Users\\user\\Documents\\Work\\Swiftx\\CSUI_TEAM_SYNC\\DeveloperProgram\\CSUI_Teams_Sync.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\user\\.nuget\\packages\\bouncycastle.cryptography\\2.2.1\\bouncycastle.cryptography.2.2.1.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\dapper\\2.1.28\\dapper.2.1.28.nupkg.sha512",

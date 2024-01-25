@@ -1287,11 +1287,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user\\source\\repos\\DeveloperProgram\\DeveloperProgram\\CSUI_Teams_Sync.csproj",
+      "projectUniqueName": "C:\\Users\\user\\Documents\\Work\\Swiftx\\CSUI_TEAM_SYNC\\DeveloperProgram\\CSUI_Teams_Sync.csproj",
       "projectName": "CSUI_Teams_Sync",
-      "projectPath": "C:\\Users\\user\\source\\repos\\DeveloperProgram\\DeveloperProgram\\CSUI_Teams_Sync.csproj",
+      "projectPath": "C:\\Users\\user\\Documents\\Work\\Swiftx\\CSUI_TEAM_SYNC\\DeveloperProgram\\CSUI_Teams_Sync.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user\\source\\repos\\DeveloperProgram\\DeveloperProgram\\obj\\",
+      "outputPath": "C:\\Users\\user\\Documents\\Work\\Swiftx\\CSUI_TEAM_SYNC\\DeveloperProgram\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1376,7 +1376,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

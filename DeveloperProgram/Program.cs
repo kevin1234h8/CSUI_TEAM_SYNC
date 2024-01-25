@@ -1,6 +1,7 @@
 using CSUI_Teams_Sync;
 using CSUI_Teams_Sync.Components.Commons;
 using CSUI_Teams_Sync.Components.Configurations;
+using CSUI_Teams_Sync.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,7 @@ var appConfig = AppSettings.Build();
 var services = builder.Services;
 builder.Services.Configure<CfgDatabase>(appConfig.GetSection("Database"));
 builder.Services.Configure<LoggerConfig>(appConfig.GetSection("Logger"));
+services.AddScoped<SyncService>();
 services.Configure<EmailConfig>(appConfig.GetSection("Email"));
 services.Configure<ConnectionConfig>(appConfig.GetSection("Connection"));
 services.Configure<TeamsGraphAPIConfig>(appConfig.GetSection("TeamsGraphAPI"));

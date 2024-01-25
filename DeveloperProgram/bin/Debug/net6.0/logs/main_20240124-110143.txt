@@ -1,5 +1,0 @@
-20240124-110143|Info|Program.<Main>$|application started
-20240124-110954|Error|CSUI_Teams_Sync.Controllers.TeamsController.GetUserIdByDisplayName|TeamsController | GetUserIdByDisplayName | error message : Object reference not set to an instance of an object.
-20240124-111225|Error|CSUI_Teams_Sync.Controllers.TeamsController.GetUserIdByDisplayName|TeamsController | GetUserIdByDisplayName | error message : Object reference not set to an instance of an object.
-20240124-111653|Error|CSUI_Teams_Sync.Controllers.TeamsController.GetUserChats|TeamsController | GetUserChats | error message : Attempted to access a missing method.
-20240124-111705|Error|CSUI_Teams_Sync.Controllers.TeamsController.GetUserChats|TeamsController | GetUserChats | error message : Attempted to access a missing method.

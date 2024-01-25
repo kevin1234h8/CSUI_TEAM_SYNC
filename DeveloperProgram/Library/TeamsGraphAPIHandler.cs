@@ -157,5 +157,113 @@ namespace CSUI_Teams_Sync.Library
                 throw ex;
             }
         }
+        public static async Task<List<Team>> GetTeams(string accessToken)
+        {
+            try
+            {
+                Teams teams = new();
+                List<Team> result = new();
+                var apiUrl = "https://graph.microsoft.com/v1.0/teams";
+                var restClient = new RestClient(apiUrl);
+
+                var request = new RestRequest();
+                request.AddHeader("Authorization", $"Bearer {accessToken}");
+                var response = await restClient.ExecuteAsync<Teams>(request);
+                
+                var isSuccessfull = response.IsSuccessful;
+                if (isSuccessfull)
+                {
+                    teams = JsonConvert.DeserializeObject<Teams>(response.Content);
+                    result = teams.Value;
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public static async Task<List<Channel>> GetChannelsByTeamID(string accessToken, string channelID)
+        {
+            try
+            {
+                Channels channels = new();
+                List<Channel> result = new();
+                var apiUrl = $"https://graph.microsoft.com/v1.0/teams/{channelID}/allChannels";
+                var restClient = new RestClient(apiUrl);
+
+                var request = new RestRequest();
+                request.AddHeader("Authorization", $"Bearer {accessToken}");
+                var response = await restClient.ExecuteAsync<Channels>(request);
+
+                var isSuccessfull = response.IsSuccessful;
+                if (isSuccessfull)
+                {
+                    channels = JsonConvert.DeserializeObject<Channels>(response.Content);
+                    result = channels.Value;
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static async Task<FilesFolders> GetFileFolderByTeamIDAndChannelID(string accessToken, string teamID, string channelID)
+        {
+            try
+            {
+                FilesFolders filesFolders = new();
+                var apiUrl = $"https://graph.microsoft.com/v1.0/teams/{teamID}/channels/{channelID}/filesFolder";
+                var restClient = new RestClient(apiUrl);
+
+                var request = new RestRequest();
+                request.AddHeader("Authorization", $"Bearer {accessToken}");
+                var response = await restClient.ExecuteAsync<FilesFolders>(request);
+
+                var isSuccessfull = response.IsSuccessful;
+                if (isSuccessfull)
+                {
+                    filesFolders = JsonConvert.DeserializeObject<FilesFolders>(response.Content);
+                }
+
+                return filesFolders;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static async Task<List<Item>> GetItemsByDriveIDAndItemID(string accessToken, string driveID, string itemID)
+        {
+            try
+            {
+                Items items = new();
+                List<Item> result = new();
+                var apiUrl = $"https://graph.microsoft.com/v1.0/drives/{driveID}/items/{itemID}/children";
+                var restClient = new RestClient(apiUrl);
+
+                var request = new RestRequest();
+                request.AddHeader("Authorization", $"Bearer {accessToken}");
+                var response = await restClient.ExecuteAsync<Items>(request);
+
+                var isSuccessfull = response.IsSuccessful;
+                if (isSuccessfull)
+                {
+                    items = JsonConvert.DeserializeObject<Items>(response.Content);
+                    result = items.Value;
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

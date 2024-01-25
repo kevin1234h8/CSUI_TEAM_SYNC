@@ -1,0 +1,1 @@
+20240125-093740|Info|Program.<Main>$|application started

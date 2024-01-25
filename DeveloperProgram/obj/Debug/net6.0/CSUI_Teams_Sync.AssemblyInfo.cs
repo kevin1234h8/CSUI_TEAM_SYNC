@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CSUI_Teams_Sync")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+169e05bcb28353a23b3c11923dc2c6e1c57308f4")]
 [assembly: System.Reflection.AssemblyProductAttribute("CSUI_Teams_Sync")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CSUI_Teams_Sync")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

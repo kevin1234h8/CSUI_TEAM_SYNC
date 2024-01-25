@@ -1,1 +1,0 @@
-20240123-162756|Info|Program.<Main>$|application started
