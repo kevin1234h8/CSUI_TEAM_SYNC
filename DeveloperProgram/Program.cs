@@ -17,6 +17,7 @@ var appConfig = AppSettings.Build();
 var services = builder.Services;
 builder.Services.Configure<CfgDatabase>(appConfig.GetSection("Database"));
 builder.Services.Configure<LoggerConfig>(appConfig.GetSection("Logger"));
+services.AddScoped<OTCSService>();
 services.AddScoped<SyncService>();
 services.AddScoped<DbService>();
 services.Configure<EmailConfig>(appConfig.GetSection("Email"));

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\user\\Documents\\Work\\Swiftx\\CSUI_TEAM_SYNC\\DeveloperProgram\\CSUI_Teams_Sync.csproj": {}
+    "C:\\work\\CSUI_TEAM_SYNC\\DeveloperProgram\\CSUI_Teams_Sync.csproj": {}
   },
   "projects": {
-    "C:\\Users\\user\\Documents\\Work\\Swiftx\\CSUI_TEAM_SYNC\\DeveloperProgram\\CSUI_Teams_Sync.csproj": {
+    "C:\\work\\CSUI_TEAM_SYNC\\DeveloperProgram\\CSUI_Teams_Sync.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user\\Documents\\Work\\Swiftx\\CSUI_TEAM_SYNC\\DeveloperProgram\\CSUI_Teams_Sync.csproj",
+        "projectUniqueName": "C:\\work\\CSUI_TEAM_SYNC\\DeveloperProgram\\CSUI_Teams_Sync.csproj",
         "projectName": "CSUI_Teams_Sync",
-        "projectPath": "C:\\Users\\user\\Documents\\Work\\Swiftx\\CSUI_TEAM_SYNC\\DeveloperProgram\\CSUI_Teams_Sync.csproj",
-        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user\\Documents\\Work\\Swiftx\\CSUI_TEAM_SYNC\\DeveloperProgram\\obj\\",
+        "projectPath": "C:\\work\\CSUI_TEAM_SYNC\\DeveloperProgram\\CSUI_Teams_Sync.csproj",
+        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
+        "outputPath": "C:\\work\\CSUI_TEAM_SYNC\\DeveloperProgram\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
