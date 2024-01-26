@@ -237,7 +237,6 @@ namespace CSUI_Teams_Sync.Library
                 throw ex;
             }
         }
-
         public static async Task<List<Item>> GetItemsByDriveIDAndItemID(string accessToken, string driveID, string itemID)
         {
             try
@@ -256,6 +255,60 @@ namespace CSUI_Teams_Sync.Library
                 {
                     items = JsonConvert.DeserializeObject<Items>(response.Content);
                     result = items.Value;
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public static async Task<List<Post>> GetPostsByTeamIDAndChannelID(string accessToken, string teamID, string channelID)
+        {
+            try
+            {
+                Posts items = new();
+                List<Post> result = new();
+                var apiUrl = $"https://graph.microsoft.com/v1.0/teams/{teamID}/channels/{channelID}/messages";
+                var restClient = new RestClient(apiUrl);
+
+                var request = new RestRequest();
+                request.AddHeader("Authorization", $"Bearer {accessToken}");
+                var response = await restClient.ExecuteAsync<Posts>(request);
+
+                var isSuccessfull = response.IsSuccessful;
+                if (isSuccessfull)
+                {
+                    items = JsonConvert.DeserializeObject<Posts>(response.Content);
+                    result = items.value;
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public static async Task<List<Post>> GetPostRepliesByTeamIDAndChannelIDAndMessageID(string accessToken, string teamID, string channelID, string messageID)
+        {
+            try
+            {
+                Posts items = new();
+                List<Post> result = new();
+                var apiUrl = $"https://graph.microsoft.com/v1.0/teams/{teamID}/channels/{channelID}/messages/{messageID}/replies";
+                var restClient = new RestClient(apiUrl);
+
+                var request = new RestRequest();
+                request.AddHeader("Authorization", $"Bearer {accessToken}");
+                var response = await restClient.ExecuteAsync<Posts>(request);
+
+                var isSuccessfull = response.IsSuccessful;
+                if (isSuccessfull)
+                {
+                    items = JsonConvert.DeserializeObject<Posts>(response.Content);
+                    result = items.value;
                 }
 
                 return result;
