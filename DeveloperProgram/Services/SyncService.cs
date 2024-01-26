@@ -43,26 +43,26 @@ namespace CSUI_Teams_Sync.Services
                         _dbService.CreateChannel(channel.id, channel.displayName, team.id);
 
                         // Sync Posts
-                        var posts = await TeamsGraphAPIHandler.GetPostsByTeamIDAndChannelID(accessToken, team.id, channel.id);
+                        //var posts = await TeamsGraphAPIHandler.GetPostsByTeamIDAndChannelID(accessToken, team.id, channel.id);
 
-                        foreach (var post in posts)
-                        {
-                            int isMeeting = 0;
+                        //foreach (var post in posts)
+                        //{
+                        //    int isMeeting = 0;
 
-                            if(post.eventDetail != null && post.eventDetail.callEventType == "meeting")
-                            {
-                                isMeeting = 1;
-                            }
+                        //    if(post.eventDetail != null && post.eventDetail.callEventType == "meeting")
+                        //    {
+                        //        isMeeting = 1;
+                        //    }
 
-                            _dbService.CreatePost(post.id, post.channelIdentity.teamId, post.channelIdentity.channelId, isMeeting, JsonConvert.SerializeObject(post));
+                        //    _dbService.CreatePost(post.id, post.channelIdentity.teamId, post.channelIdentity.channelId, isMeeting, JsonConvert.SerializeObject(post));
 
-                            var postReplies = await TeamsGraphAPIHandler.GetPostRepliesByTeamIDAndChannelIDAndMessageID(accessToken, post.channelIdentity.teamId, post.channelIdentity.channelId, post.id);
+                        //    var postReplies = await TeamsGraphAPIHandler.GetPostRepliesByTeamIDAndChannelIDAndMessageID(accessToken, post.channelIdentity.teamId, post.channelIdentity.channelId, post.id);
 
-                            foreach (var postReply in postReplies)
-                            {
-                                _dbService.CreatePostReply(postReply.id, post.id, JsonConvert.SerializeObject(postReply));
-                            }
-                        }
+                        //    foreach (var postReply in postReplies)
+                        //    {
+                        //        _dbService.CreatePostReply(postReply.id, post.id, JsonConvert.SerializeObject(postReply));
+                        //    }
+                        //}
 
                         // Sync Files And Folders
                         //var filesFolders = await TeamsGraphAPIHandler.GetFileFolderByTeamIDAndChannelID(accessToken, team.id, channel.id);
@@ -82,6 +82,25 @@ namespace CSUI_Teams_Sync.Services
                         //        await DownloadFile.DownloadFileAsync(channelPath, item.downloadUrl, item.name);
                         //    }
                         //}
+
+                        var users = await TeamsGraphAPIHandler.GetUsers(accessToken);
+
+                        foreach(var user in users.Value)
+                        {
+                            var chats = await TeamsGraphAPIHandler.GetUserChats(accessToken, user.Id);
+
+                            foreach (var chat in chats)
+                            {
+                                _dbService.CreateChat(chat.Id, user.Id, chat.Topic, chat.ChatType, JsonConvert.SerializeObject(chat));
+
+                                var messages = await TeamsGraphAPIHandler.GetChatMessages(accessToken, user.Id, chat.Id);
+
+                                foreach (var message in messages)
+                                {
+                                    _dbService.CreateMessage(message.Id, user.Id, chat.Id, JsonConvert.SerializeObject(message));
+                                }
+                            }
+                        }
                     }
                 }
 

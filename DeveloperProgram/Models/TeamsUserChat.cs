@@ -9,7 +9,7 @@
     public class Chat
     {
         public string Id { get; set; }
-        public string Topic { get; set; }
+        public string? Topic { get; set; }
         public DateTime CreatedDateTime { get; set; }
         public DateTime LastUpdatedDateTime { get; set; }
         public string ChatType { get; set; }

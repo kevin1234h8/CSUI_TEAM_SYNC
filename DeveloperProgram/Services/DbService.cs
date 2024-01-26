@@ -1,4 +1,5 @@
-﻿using System.Data.SqlClient;
+﻿using CSUI_Teams_Sync.Models;
+using System.Data.SqlClient;
 
 namespace CSUI_Teams_Sync.Services
 {
@@ -88,6 +89,51 @@ namespace CSUI_Teams_Sync.Services
             catch (Exception ex)
             {
                 Console.WriteLine($"Post {ID} Already Exist, Skipping...");
+            }
+        }
+        public void CreateChat(string ID, string userID, string? topic, string chatType, string data)
+        {
+            using SqlConnection connection = new(connectionString);
+            try
+            {
+                connection.Open();
+
+                string query = "INSERT INTO chats (ID, UserID, Topic, ChatType, Data) VALUES (@ID, @UserID, @Topic, @ChatType, @Data)";
+
+                using SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@ID", ID);
+                command.Parameters.AddWithValue("@UserID", userID);
+                command.Parameters.AddWithValue("@Topic", topic ?? "");
+                command.Parameters.AddWithValue("@ChatType", chatType);
+                command.Parameters.AddWithValue("@Data", data);
+
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Chat {ID} Already Exist, Skipping...");
+            }
+        }
+        public void CreateMessage(string ID, string userID, string chatID, string data)
+        {
+            using SqlConnection connection = new(connectionString);
+            try
+            {
+                connection.Open();
+
+                string query = "INSERT INTO messages (ID, UserID, ChatID, Data) VALUES (@ID, @UserID, @ChatID, @Data)";
+
+                using SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@ID", ID);
+                command.Parameters.AddWithValue("@UserID", userID);
+                command.Parameters.AddWithValue("@ChatID", chatID);
+                command.Parameters.AddWithValue("@Data", data);
+
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Message {ID} Already Exist, Skipping...");
             }
         }
     }

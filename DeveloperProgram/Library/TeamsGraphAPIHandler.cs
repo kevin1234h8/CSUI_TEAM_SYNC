@@ -4,6 +4,7 @@ using CSUI_Teams_Sync.Models;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RestSharp;
+using System.Threading.Channels;
 
 namespace CSUI_Teams_Sync.Library
 {
@@ -129,8 +130,34 @@ namespace CSUI_Teams_Sync.Library
                 throw ex;
             }
         }
+        
+        public static async Task<List<Message>> GetChatMessages(string accessToken, string userID, string chatID)
+        {
+            try
+            {
+                List<Message> messages = new();
+                var apiUrl = $"https://graph.microsoft.com/v1.0/users/{userID}/chats/{chatID}/messages";
+                var restClient = new RestClient(apiUrl);
 
+                var request = new RestRequest();
+                request.AddHeader("Authorization", $"Bearer {accessToken}");
+                var response = await restClient.ExecuteAsync<TeamsChatMessage>(request);
 
+                var isSuccessfull = response.IsSuccessful;
+                if (isSuccessfull)
+                {
+                    var data = JsonConvert.DeserializeObject<TeamsChatMessage>(response.Content);
+                    messages = data.Value;
+                }
+
+                return messages;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public static async Task<List<Chat>> GetUserChats(string accessToken, string userId)
         {
             try
@@ -184,12 +211,12 @@ namespace CSUI_Teams_Sync.Library
                 throw ex;
             }
         }
-        public static async Task<List<Channel>> GetChannelsByTeamID(string accessToken, string channelID)
+        public static async Task<List<Models.Channel>> GetChannelsByTeamID(string accessToken, string channelID)
         {
             try
             {
                 Channels channels = new();
-                List<Channel> result = new();
+                List<Models.Channel> result = new();
                 var apiUrl = $"https://graph.microsoft.com/v1.0/teams/{channelID}/allChannels";
                 var restClient = new RestClient(apiUrl);
 
