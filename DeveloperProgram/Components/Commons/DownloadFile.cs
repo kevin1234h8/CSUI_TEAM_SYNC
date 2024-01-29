@@ -11,10 +11,9 @@ namespace CSUI_Teams_Sync.Components.Commons
 {
     public class DownloadFile
     {
-        private readonly static OTCSService _otcsService = new();
-        public static async Task DownloadFileAsync(string url, long parentID, string name, string ticket)
+        public static async Task<OTCSCreateNodeResponseProperties> DownloadFileAsync(string url, long parentID, string name, string ticket)
         {
-            using HttpClient httpClient = new HttpClient();
+            using HttpClient httpClient = new();
             try
             {
                 byte[] fileContent = await httpClient.GetByteArrayAsync(url);
@@ -29,14 +28,13 @@ namespace CSUI_Teams_Sync.Components.Commons
                 request.AddParameter("parent_id", parentID);
                 request.AddParameter("name", name);
                 request.AddFile("file", filePath);
-
-                var a = await client.ExecuteAsync(request);
-
-                Console.WriteLine(a.Content);
+                RestResponse response = await client.ExecuteAsync<OTCSCreateNodeResponseProperties>(request);
+                return JsonConvert.DeserializeObject<OTCSCreateNodeResponseProperties>(response.Content);
             }
             catch (HttpRequestException ex)
             {
                 Console.WriteLine($"Error downloading the file: {ex.Message}");
+                return null;
             }
         }
     }

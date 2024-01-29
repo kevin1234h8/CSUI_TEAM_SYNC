@@ -60,6 +60,14 @@
               "target": "Package",
               "version": "[8.0.0, )"
             },
+            "Microsoft.Graph": {
+              "target": "Package",
+              "version": "[5.40.0, )"
+            },
+            "Microsoft.Identity.Client": {
+              "target": "Package",
+              "version": "[4.59.0, )"
+            },
             "NLog": {
               "target": "Package",
               "version": "[5.2.8, )"

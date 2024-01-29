@@ -1,6 +1,7 @@
 ﻿using CSUI_Teams_Sync.Models;
 using Newtonsoft.Json;
 using RestSharp;
+using System.Runtime.CompilerServices;
 
 namespace CSUI_Teams_Sync.Services
 {
@@ -47,7 +48,27 @@ namespace CSUI_Teams_Sync.Services
                 request.AddHeader("otcsticket", ticket);
                 request.AddParameter("body", JsonConvert.SerializeObject(body));
                 RestResponse response = await client.ExecuteAsync<OTCSCreateNodeResponse>(request);
+
                 return JsonConvert.DeserializeObject<OTCSCreateNodeResponse>(response.Content);
+            }
+            catch (Exception ex)
+            {
+                Console.Write(ex.Message);
+                throw ex;
+            }
+        }
+        public async Task DeleteItem(string ticket, string nodeID)
+        {
+            try
+            {
+                var options = new RestClientOptions("http://localhost")
+                {
+                    MaxTimeout = -1,
+                };
+                var client = new RestClient(options);
+                var request = new RestRequest($"/otcs/cs.exe/api/v2/nodes/{nodeID}", Method.Delete);
+                request.AddHeader("otcsticket", ticket);
+                await client.ExecuteAsync(request);
             }
             catch (Exception ex)
             {

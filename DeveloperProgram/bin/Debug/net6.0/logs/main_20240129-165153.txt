@@ -1,0 +1,1 @@
+20240129-165153|Info|Program.<Main>$|application started

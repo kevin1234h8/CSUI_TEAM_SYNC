@@ -4,13 +4,13 @@ using CSUI_Teams_Sync.Models;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using RestSharp;
-using System.Threading.Channels;
 
 namespace CSUI_Teams_Sync.Library
 {
     public class TeamsGraphAPIHandler
     {
-        private readonly TeamsGraphAPIConfig _teamsGraphAPIConfig;
+        private static string driveID = "b!z0OTo9KIVUybZ4Xnw6nahGerlNEirJNMrxmczUFvWKqg2I5z7GdLQJSDBsLbk8At";
+        public readonly TeamsGraphAPIConfig _teamsGraphAPIConfig;
         public readonly NLog.Logger _logger;
         public TeamsGraphAPIHandler(IOptions<TeamsGraphAPIConfig> teamsGraphAPIConfig, LogManagerCustom logManagerCustom)
         {
@@ -336,6 +336,82 @@ namespace CSUI_Teams_Sync.Library
                 {
                     items = JsonConvert.DeserializeObject<Posts>(response.Content);
                     result = items.value;
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public static async Task<string> GetDriveDelta(string accessToken)
+        {
+            try
+            {
+                string result = "";
+                var apiUrl = $"https://graph.microsoft.com/v1.0/drives/{driveID}/root/delta";
+                var restClient = new RestClient(apiUrl);
+
+                var request = new RestRequest();
+                request.AddHeader("Authorization", $"Bearer {accessToken}");
+                var response = await restClient.ExecuteAsync<DriveDelta>(request);
+
+                var isSuccessfull = response.IsSuccessful;
+                if (isSuccessfull)
+                {
+                    var driveDelta = JsonConvert.DeserializeObject<DriveDelta>(response.Content);
+                    result = driveDelta.DeltaLink;
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public static async Task<DeltaItems> GetDeltaItems(string accessToken, string link)
+        {
+            try
+            {
+                DeltaItems result = new();
+                var restClient = new RestClient(link);
+
+                var request = new RestRequest();
+                request.AddHeader("Authorization", $"Bearer {accessToken}");
+                var response = await restClient.ExecuteAsync<DeltaItems>(request);
+
+                var isSuccessfull = response.IsSuccessful;
+                if (isSuccessfull)
+                {
+                    result = JsonConvert.DeserializeObject<DeltaItems>(response.Content);
+                }
+                Console.WriteLine(response.Content);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public static async Task<string> GetItemDownloadUrl(string accessToken, string itemID)
+        {
+            try
+            {
+                string result = "";
+                var restClient = new RestClient($"https://graph.microsoft.com/v1.0/drives/{driveID}/items/{itemID}?select=id,@microsoft.graph.downloadUrl");
+
+                var request = new RestRequest();
+                request.AddHeader("Authorization", $"Bearer {accessToken}");
+                var response = await restClient.ExecuteAsync<Item>(request);
+
+                var isSuccessfull = response.IsSuccessful;
+                if (isSuccessfull)
+                {
+                    Console.WriteLine(JsonConvert.SerializeObject(response.Content));
+                    var item = JsonConvert.DeserializeObject<Item>(response.Content);
+                    result = item.downloadUrl;
                 }
 
                 return result;
