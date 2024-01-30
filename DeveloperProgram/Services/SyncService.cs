@@ -4,6 +4,7 @@ using CSUI_Teams_Sync.Library;
 using CSUI_Teams_Sync.Models;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using System.Reflection.Metadata.Ecma335;
 
 namespace CSUI_Teams_Sync.Services
 {
@@ -64,6 +65,8 @@ namespace CSUI_Teams_Sync.Services
                         var filesFolders = await TeamsGraphAPIHandler.GetFileFolderByTeamIDAndChannelID(accessToken, team.id, channel.id);
                         var items = await TeamsGraphAPIHandler.GetItemsByDriveIDAndItemID(accessToken, filesFolders.parentReference.driveId, filesFolders.id);
 
+                        _dbService.CreateChannelItem(channel.id, filesFolders.id);
+
                         var bodyChannel = new OTCSCreateNode()
                         {
                             parent_id = teamFolder.results.data.properties.id,
@@ -72,7 +75,7 @@ namespace CSUI_Teams_Sync.Services
                         };
 
                         var teamChannel = await _otcsService.CreateFolder(ticket, bodyChannel);
-                        if(teamChannel != null)
+                        if (teamChannel != null)
                         {
                             _dbService.CreateItem(teamChannel.results.data.properties.id, filesFolders.name, filesFolders.id);
                         }
@@ -86,7 +89,7 @@ namespace CSUI_Teams_Sync.Services
                             else
                             {
                                 var download = await DownloadFile.DownloadFileAsync(item.downloadUrl, teamChannel.results.data.properties.id, item.name, ticket);
-                                if(download != null)
+                                if (download != null)
                                 {
                                     _dbService.CreateItem(download.id, item.name, item.id);
                                 }

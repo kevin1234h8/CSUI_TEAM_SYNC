@@ -6,6 +6,7 @@ using CSUI_Teams_Sync.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using Org.BouncyCastle.Utilities;
 
 namespace CSUI_Teams_Sync.Controllers
 {
@@ -47,36 +48,43 @@ namespace CSUI_Teams_Sync.Controllers
                 var deltaItems = await TeamsGraphAPIHandler.GetDeltaItems(accessToken, link);
                 dbService.CreateDeltaLink(deltaItems.DeltaLink);
 
-                Console.WriteLine(deltaItems.Value.Count);
-
                 if(deltaItems.Value.Count > 0)
                 {
                     Console.WriteLine("Syncing File...");
                     var item = deltaItems.Value.Last();
 
-                    if(item.Deleted != null)
+                    var channelID = dbService.GetChannelByItemID(item.ParentReference.ID);
+                    var channelConfig = dbService.GetChannelConfiguration(channelID);
+
+                    var configs = channelConfig.Select(obj => obj.ID).ToList();
+
+                    Console.WriteLine(channelID);
+                    Console.WriteLine(configs.Contains(0));
+
+                    if(configs.Contains(0))
                     {
-                        if(item.Deleted.State == "deleted")
+                        if (item.Deleted != null)
                         {
-                            var node = dbService.GetItemNodeIDByDriveID(item.ID);
-                            await otcsService.DeleteItem(await otcsService.GetTicket(), node.ToString());
+                            if(item.Deleted.State == "deleted")
+                            {
+                                var node = dbService.GetItemNodeIDByDriveID(item.ID);
+                                await otcsService.DeleteItem(await otcsService.GetTicket(), node.ToString());
 
-                            Console.WriteLine("File Deleted");
+                                Console.WriteLine("File Deleted");
+                            }
+                        } 
+                        else
+                        {
+                            var downloadUrl = await TeamsGraphAPIHandler.GetItemDownloadUrl(accessToken, item.ID);
+                            var parentID = dbService.GetItemNodeIDByDriveID(item.ParentReference.ID);
 
-                            return Ok();
+                            Console.WriteLine(parentID);
+
+                            var node = await DownloadFile.DownloadFileAsync(downloadUrl, parentID, item.Name, await otcsService.GetTicket());
+                            dbService.CreateItem(node.id, item.Name, item.ID);
+
+                            Console.WriteLine("New File Synced");
                         }
-                    } 
-                    else
-                    {
-                        var downloadUrl = await TeamsGraphAPIHandler.GetItemDownloadUrl(accessToken, item.ID);
-                        var parentID = dbService.GetItemNodeIDByDriveID(item.ParentReference.ID);
-
-                        Console.WriteLine(parentID);
-
-                        var node = await DownloadFile.DownloadFileAsync(downloadUrl, parentID, item.Name, await otcsService.GetTicket());
-                        dbService.CreateItem(node.id, item.Name, item.ID);
-
-                        Console.WriteLine("New File Synced");
                     }
                 }
 
