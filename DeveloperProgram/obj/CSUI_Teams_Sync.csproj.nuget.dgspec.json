@@ -48,6 +48,10 @@
               "target": "Package",
               "version": "[2.1.28, )"
             },
+            "Handlebars.Net": {
+              "target": "Package",
+              "version": "[2.1.4, )"
+            },
             "Microsoft.Extensions.Configuration": {
               "target": "Package",
               "version": "[8.0.0, )"

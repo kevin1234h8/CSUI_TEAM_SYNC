@@ -1,13 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "KMF5T6XiEbEr+t9xQcUXq1h2U1m/Dl/lliUHaBOnQEM/1R1lqH/nUq6sBmcWYWl4SJCyHcI6L5vzo+RwKn9KEg==",
+  "dgSpecHash": "8oPqPikSC7hYWxVqaj1lgNYueKg8Aja8ssVOI943mzYSHA05ZsKx5bmB7DYDs9IukUcWpf3QYKcQl603+1NjpQ==",
   "success": true,
   "projectFilePath": "C:\\work\\CSUI_TEAM_SYNC\\DeveloperProgram\\CSUI_Teams_Sync.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Administrator\\.nuget\\packages\\azure.core\\1.36.0\\azure.core.1.36.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\bouncycastle.cryptography\\2.2.1\\bouncycastle.cryptography.2.2.1.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\dapper\\2.1.28\\dapper.2.1.28.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\handlebars.net\\2.1.4\\handlebars.net.2.1.4.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.configuration\\8.0.0\\microsoft.extensions.configuration.8.0.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\8.0.0\\microsoft.extensions.configuration.abstractions.8.0.0.nupkg.sha512",

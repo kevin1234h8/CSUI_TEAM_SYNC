@@ -28,7 +28,7 @@ namespace CSUI_Teams_Sync.Services
                 lifecycleNotificationUrl = $"{baseUrl}/api/v1/subscription",
                 notificationUrl = $"{baseUrl}/api/v1/subscription",
                 resource = "drives/b!z0OTo9KIVUybZ4Xnw6nahGerlNEirJNMrxmczUFvWKqg2I5z7GdLQJSDBsLbk8At/root",
-                expirationDateTime = UTC.CreateUTCByIncrementDays(2),
+                expirationDateTime = TimeUtils.CreateUTCByIncrementDays(2),
             };
 
             request.AddJsonBody(jsonPayload);

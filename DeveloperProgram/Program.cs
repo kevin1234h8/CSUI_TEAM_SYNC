@@ -19,6 +19,7 @@ builder.Services.Configure<LoggerConfig>(appConfig.GetSection("Logger"));
 services.AddScoped<OTCSService>();
 services.AddScoped<SubscriptionService>();
 services.AddScoped<SyncService>();
+services.AddScoped<HTMLService>();
 services.AddScoped<DbService>();
 services.Configure<EmailConfig>(appConfig.GetSection("Email"));
 services.Configure<ConnectionConfig>(appConfig.GetSection("Connection"));

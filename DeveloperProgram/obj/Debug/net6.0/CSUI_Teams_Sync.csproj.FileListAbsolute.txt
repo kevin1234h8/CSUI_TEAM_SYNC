@@ -181,3 +181,4 @@ C:\work\CSUI_TEAM_SYNC\DeveloperProgram\bin\Debug\net6.0\Std.UriTemplate.dll
 C:\work\CSUI_TEAM_SYNC\DeveloperProgram\bin\Debug\net6.0\System.Diagnostics.DiagnosticSource.dll
 C:\work\CSUI_TEAM_SYNC\DeveloperProgram\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
 C:\work\CSUI_TEAM_SYNC\DeveloperProgram\bin\Debug\net6.0\System.Memory.Data.dll
+C:\work\CSUI_TEAM_SYNC\DeveloperProgram\bin\Debug\net6.0\Handlebars.dll

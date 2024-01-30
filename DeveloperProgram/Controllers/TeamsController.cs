@@ -149,5 +149,25 @@ namespace CSUI_Teams_Sync.Controllers
                 return Ok(result);
             }
         }
+        
+        [HttpGet("post/channel/{channelID}")]
+        public async Task<IActionResult> GetPosts(string channelID)
+        {
+            APIResponse<string> result = new()
+            {
+                Data = "<div>COMING SOON</div>"
+            };
+
+            try
+            {
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                result.Message = "INTERNAL_SERVER_ERROR";
+                return Ok(result);
+            }
+        }
     }
 }

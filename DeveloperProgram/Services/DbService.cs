@@ -9,6 +9,7 @@ namespace CSUI_Teams_Sync.Services
     {
         readonly string connectionString = "Data Source=localhost;Initial Catalog=OTCS;User Id=sa;Password=P@ssw0rd;";
         readonly string channelItemsTable = "TeamsBackup_ChannelItems";
+        readonly string channelPostsTable = "TeamsBackup_ChannelPosts";
         readonly string itemsTable = "TeamsBackup_Items";
         readonly string teamsTable = "TeamsBackup_Teams";
         readonly string postsTable = "TeamsBackup_Posts";
@@ -38,6 +39,56 @@ namespace CSUI_Teams_Sync.Services
             {
                 Console.WriteLine(ex.Message);
                 Console.WriteLine($"Team {name} Already Exist, Skipping...");
+            }
+        }
+        public void CreateChannelPost(string channelID, string nodeID)
+        {
+            using SqlConnection connection = new(connectionString);
+            try
+            {
+                connection.Open();
+
+                string query = $"INSERT INTO {channelPostsTable} (ChannelID, NodeID) VALUES (@ID, @NodeID)";
+
+                using SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@ChannelID", channelID);
+                command.Parameters.AddWithValue("@NodeID", nodeID);
+
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine($"Channel {channelID} Already Exist, Skipping...");
+            }
+        }
+        public string GetChannelPostByChannelID(string channelID)
+        {
+            using SqlConnection connection = new(connectionString);
+            string result = "";
+
+            try
+            {
+                connection.Open();
+
+                string query = $"SELECT NodeID FROM {channelPostsTable} WHERE ChanneldID = @ChannelID";
+
+                using SqlCommand command = new(query, connection);
+                command.Parameters.AddWithValue("@ChannelID", channelID);
+
+                using SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    result = reader["NodeID"].ToString();
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return result;
             }
         }
         public void CreateChannelItem(string channelID, string itemID)
